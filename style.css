@@ -1,94 +1,85 @@
 body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background: linear-gradient(to bottom right, #ff9a9e, #fad0c4);
-  flex-direction: column;
-  font-family: 'Poppins', sans-serif;
-  overflow: hidden;
-  position: relative;
 }
 
 h2 {
-  color: white;
+  color: #fff;
   font-size: 28px;
-  margin-bottom: 20px;
-  text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+}
+
+.heartbeat {
+  font-size: 30px;
+  color: #e91e63;
+  font-weight: bold;
+  margin: 10px 0 30px 0;
+  animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  20% { transform: scale(1.3); }
+  40% { transform: scale(1); }
+  60% { transform: scale(1.3); }
+  100% { transform: scale(1); }
 }
 
 #questionContainer {
   position: relative;
   width: 300px;
   height: 200px;
-  text-align: center;
+  margin: auto;
 }
 
 button {
-  padding: 12px 25px;
-  font-size: 18px;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  margin: 10px;
-  transition: 0.3s;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-}
-
-#noBtn {
   position: absolute;
-  background: crimson;
-  color: white;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
 }
 
 #yesBtn {
-  background: limegreen;
+  background: #4caf50;
   color: white;
+  bottom: 20px;
+  left: 50px;
+}
+
+#noBtn {
+  background: #f44336;
+  color: white;
+  bottom: 20px;
+  right: 50px;
+  transition: all 0.4s ease; /* Smooth move */
 }
 
 #heartLoader {
   display: none;
-  font-size: 50px;
+  font-size: 40px;
+  animation: beat 0.5s infinite alternate;
   margin-top: 20px;
-  animation: beat 0.6s infinite alternate;
 }
 
 @keyframes beat {
-  to {
-    transform: scale(1.3);
-  }
+  from { transform: scale(1); }
+  to { transform: scale(1.4); }
 }
 
 #resultContainer {
   display: none;
-  font-size: 32px;
-  margin-top: 30px;
+  font-size: 24px;
   color: white;
-  font-weight: bold;
-  animation: pop 0.6s ease forwards;
-}
-
-@keyframes pop {
-  from { transform: scale(0); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-/* Floating hearts background */
-.hearts::before, .hearts::after {
-  content: "💖";
-  position: absolute;
-  font-size: 40px;
-  animation: float 6s linear infinite;
-  top: 100%;
-  left: 20%;
-}
-.hearts::after {
-  left: 70%;
-  animation-delay: 3s;
-}
-
-@keyframes float {
-  from { top: 100%; opacity: 1; }
-  to { top: -10%; opacity: 0; }
+  margin-top: 20px;
 }
 

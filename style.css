@@ -1,0 +1,55 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: pink;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+}
+
+#questionContainer {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  text-align: center;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+#noBtn {
+  position: absolute;
+  background: crimson;
+  color: white;
+}
+
+#yesBtn {
+  background: limegreen;
+  color: white;
+}
+
+#heartLoader {
+  display: none;
+  font-size: 40px;
+  animation: beat 0.6s infinite alternate;
+}
+
+@keyframes beat {
+  to {
+    transform: scale(1.2);
+  }
+}
+
+#resultContainer {
+  display: none;
+  font-size: 28px;
+  margin-top: 20px;
+  color: red;
+}

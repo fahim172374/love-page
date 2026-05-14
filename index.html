@@ -3,23 +3,189 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Love Me Valentine</title>
-  <link rel="stylesheet" href="style.css">
+  <title>SBAR: Server Performance & Login Issue</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f4f7fc;
+      font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    }
+    .email-wrapper {
+      max-width: 620px;
+      margin: 20px auto;
+      background-color: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e2e8f0;
+    }
+    .header {
+      background-color: #1e3a5f;
+      padding: 24px 28px;
+      color: white;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: -0.2px;
+    }
+    .header p {
+      margin: 8px 0 0;
+      font-size: 13px;
+      opacity: 0.8;
+    }
+    .content {
+      padding: 28px 30px 34px;
+    }
+    .sbar-block {
+      margin-bottom: 28px;
+      border-left: 4px solid;
+      padding-left: 20px;
+    }
+    .sbar-title {
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 10px;
+      letter-spacing: -0.2px;
+    }
+   ..Current.Issue{
+  border-left: 6px solid #ff6b6b;
+  background: linear-gradient(90deg, #fff5f5, #ffffff);
+}
+
+.Context{
+  border-left: 6px solid #4dabf7;
+  background: linear-gradient(90deg, #f1f8ff, #ffffff);
+}
+
+.Current.Impact{
+  border-left: 6px solid #f06595;
+  background: linear-gradient(90deg, #fff0f6, #ffffff);
+}
+
+.Recommended.Action{
+  border-left: 6px solid #51cf66;
+  background: linear-gradient(90deg, #f4fff6, #ffffff);
+}
+
+/* Titles */
+.Current.Issue .sbar-title{
+  color: #FF0000;
+}
+
+.Context .sbar-title{
+  color: #4dabf7;
+}
+
+.Current.Impact .sbar-title{
+  color: #f06595;
+}
+
+.Recommended.Action .sbar-title{
+  color: #51cf66;
+}
+    .text {
+      font-size: 15px;
+      line-height: 1.55;
+      color: #2c3e50;
+      margin: 0 0 8px;
+    }
+    .signature {
+      margin-top: 32px;
+      padding-top: 20px;
+      border-top: 1px solid #e9edf2;
+    }
+    .signature-name {
+      font-weight: 700;
+      font-size: 16px;
+      color: #1e3a5f;
+      margin-bottom: 4px;
+    }
+    .footer-note {
+      background-color: #f8fafc;
+      padding: 18px 28px;
+      font-size: 12px;
+      color: #5a7184;
+      border-top: 1px solid #e9edf2;
+      text-align: center;
+    }
+    .badge {
+      display: inline-block;
+      background-color: #fef3e8;
+      color: #e67e22;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 30px;
+      margin-bottom: 16px;
+    }
+    .inline-highlight {
+      background-color: #fff1f0;
+      padding: 2px 6px;
+      border-radius: 12px;
+      font-weight: 500;
+      color: #c0392b;
+    }
+    @media (max-width: 550px) {
+      .content { padding: 20px 22px; }
+      .header { padding: 18px 22px; }
+    }
+  </style>
 </head>
-<body>
-  <div class="hearts"></div>
-  <h2>Do you love me? ❤️</h2>
-
-  <div id="questionContainer">
-    <button id="yesBtn">Yes 💚</button>
-    <button id="noBtn">No 💔</button>
+<body style="margin:0; padding:20px 16px; background-color:#f4f7fc;">
+  <div class="email-wrapper">
+    <div class="header">
+      Server performance issue impacting user login</h1>
+      <p>Actionable intelligence · Login performance degradation</p>
+    </div>
+    <div class="content">
+      <div style="margin-bottom: 20px;">
+        <span class="badge"> URGENT · PRODUCTION INCIDENT · REGION: SINGAPORE</span>
+      </div>
+      
+      <!-- Subject / Context line (no extra to/from fields, just subject as part of opening) -->
+    <!-- <p class="text" style="margin-bottom: 20px; background: #f0f4f9; padding: 12px 14px; border-radius: 14px; color: #1e4663;">
+        <strong>📌 Subject:</strong> Server performance issue impacting user login — urgent remediation required</p> -->
+      
+      <!-- Situation -->
+      <div class="sbar-block situation">
+        <div class="sbar-title">Current Issue</div>
+        <p class="text"><strong>There is a significant lag in user login times for our corporate clients.</p>
+        
+      </div>
+      
+      <!-- Context -->
+      <div class="sbar-block Context">
+        <div class="sbar-title">Context</div>
+        <p class="text"><strong>Login attempts have been timing out for users on the <strong class="inline-highlight">Singapore</strong> region for the last <strong class="inline-highlight">30 minutes.</strong> The issue started after the new authentication module was deployed this morning.</p>
+      </div>
+      
+      <!-- Current Impact -->
+      <div class="sbar-block Current Impact">
+        <div class="sbar-title">Current Impact</div>
+        <p class="text"><strong>The new module is likely causing a bottleneck. The high volume of concurrent login requests is overwhelming the current server capacity.</p>
+        
+      </div>
+      
+      <!-- Recommended Action -->
+      <div class="sbar-block Recommended Action">
+        <div class="sbar-title">Recommended Action</div>
+        <p class="text"><strong>We need to roll back the new module immediately and investigate the issue in a staging environment.</p>
+        
+      </div>
+      
+      <div class="signature">
+        <div class="signature-name">Fahim Feroz · IT Department </div>
+        <div style="font-size: 14px; color: #4a627a;">Platform Reliability Engineering</div>
+        <div style="font-size: 13px; color: #7d8fa4; margin-top: 5px;">📞 +8801719398997 |  ✉️fahimferozofficial@gmail.com</div>
+        <div style="font-size: 12px; color: #94a8c0; margin-top: 8px;">cc: SRE Lead, APAC Client Success, Authentication Team Lead, NOC</div>
+      </div>
+    </div>
+    <div class="footer-note">
+      Stay fun
+    </div>
   </div>
-
-  <div id="heartLoader">❤️</div>
-  <div id="resultContainer">Yay! I love you too 💕</div>
-
-  <!-- Confetti Library -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <script src="script.js"></script>
 </body>
 </html>

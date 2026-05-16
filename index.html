@@ -1,191 +1,1228 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SBAR: Server Performance & Login Issue</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #f4f7fc;
-      font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
-    }
-    .email-wrapper {
-      max-width: 620px;
-      margin: 20px auto;
-      background-color: #ffffff;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      border: 1px solid #e2e8f0;
-    }
-    .header {
-      background-color: #1e3a5f;
-      padding: 24px 28px;
-      color: white;
-    }
-    .header h1 {
-      margin: 0;
-      font-size: 20px;
-      font-weight: 500;
-      letter-spacing: -0.2px;
-    }
-    .header p {
-      margin: 8px 0 0;
-      font-size: 13px;
-      opacity: 0.8;
-    }
-    .content {
-      padding: 28px 30px 34px;
-    }
-    .sbar-block {
-      margin-bottom: 28px;
-      border-left: 4px solid;
-      padding-left: 20px;
-    }
-    .sbar-title {
-      font-weight: 700;
-      font-size: 18px;
-      margin-bottom: 10px;
-      letter-spacing: -0.2px;
-    }
-   ..Current.Issue{
-  border-left: 6px solid #ff6b6b;
-  background: linear-gradient(90deg, #fff5f5, #ffffff);
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corporate Communication Email Builder</title>
+    <style>
+        :root {
+            --bg: #f5f6f8;
+            --surface: #ffffff;
+            --surface-alt: #f8f9fb;
+            --text: #1a1d23;
+            --text-secondary: #5a5f6b;
+            --text-muted: #8b8f99;
+            --border: #e2e5ea;
+            --border-light: #eef0f3;
+            --accent: #2563eb;
+            --accent-light: #eef4ff;
+            --accent-dark: #1d4ed8;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.09), 0 4px 8px rgba(0, 0, 0, 0.04);
+            --radius-sm: 6px;
+            --radius: 10px;
+            --radius-lg: 14px;
+            --radius-xl: 18px;
+            --font: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            --font-mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+            --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 
-.Context{
-  border-left: 6px solid #4dabf7;
-  background: linear-gradient(90deg, #f1f8ff, #ffffff);
-}
+            /* Email theme defaults (Executive) */
+            --email-header-bg: #1e2a3a;
+            --email-header-text: #ffffff;
+            --email-accent: #c9a84c;
+            --email-accent-subtle: #fdf6e8;
+            --email-block-border: #e8e5dc;
+            --email-block-accent: #1e2a3a;
+            --email-badge-bg: #eef1f5;
+            --email-badge-text: #4a5568;
+            --email-body-bg: #ffffff;
+            --email-highlight: #fff3cd;
+            --email-highlight-border: #f0d78c;
+        }
 
-.Current.Impact{
-  border-left: 6px solid #f06595;
-  background: linear-gradient(90deg, #fff0f6, #ffffff);
-}
+        [data-email-theme="google"] {
+            --email-header-bg: #1a73e8;
+            --email-header-text: #ffffff;
+            --email-accent: #1a73e8;
+            --email-accent-subtle: #e8f0fe;
+            --email-block-border: #e0e7f0;
+            --email-block-accent: #1a73e8;
+            --email-badge-bg: #e8f0fe;
+            --email-badge-text: #1a73e8;
+            --email-body-bg: #ffffff;
+            --email-highlight: #fef7e0;
+            --email-highlight-border: #f9d849;
+        }
 
-.Recommended.Action{
-  border-left: 6px solid #51cf66;
-  background: linear-gradient(90deg, #f4fff6, #ffffff);
-}
+        [data-email-theme="microsoft"] {
+            --email-header-bg: #0078d4;
+            --email-header-text: #ffffff;
+            --email-accent: #0078d4;
+            --email-accent-subtle: #e6f2fb;
+            --email-block-border: #d0dbe6;
+            --email-block-accent: #0078d4;
+            --email-badge-bg: #e6f2fb;
+            --email-badge-text: #0078d4;
+            --email-body-bg: #ffffff;
+            --email-highlight: #fffde7;
+            --email-highlight-border: #f5d442;
+        }
 
-/* Titles */
-.Current.Issue .sbar-title{
-  color: #FF0000;
-}
+        [data-email-theme="executive"] {
+            --email-header-bg: #1e2a3a;
+            --email-header-text: #ffffff;
+            --email-accent: #c9a84c;
+            --email-accent-subtle: #fdf6e8;
+            --email-block-border: #e8e5dc;
+            --email-block-accent: #1e2a3a;
+            --email-badge-bg: #eef1f5;
+            --email-badge-text: #4a5568;
+            --email-body-bg: #ffffff;
+            --email-highlight: #fffdf5;
+            --email-highlight-border: #e8d58c;
+        }
 
-.Context .sbar-title{
-  color: #4dabf7;
-}
+        [data-email-theme="minimal"] {
+            --email-header-bg: #fafafa;
+            --email-header-text: #1a1a1a;
+            --email-accent: #333333;
+            --email-accent-subtle: #f5f5f5;
+            --email-block-border: #eaeaea;
+            --email-block-accent: #333333;
+            --email-badge-bg: #f0f0f0;
+            --email-badge-text: #555555;
+            --email-body-bg: #ffffff;
+            --email-highlight: #fffef5;
+            --email-highlight-border: #e0dcc0;
+        }
 
-.Current.Impact .sbar-title{
-  color: #f06595;
-}
+        [data-email-theme="enterprise"] {
+            --email-header-bg: #0d1b2a;
+            --email-header-text: #e8edf2;
+            --email-accent: #3b82f6;
+            --email-accent-subtle: #eff6ff;
+            --email-block-border: #d5dde5;
+            --email-block-accent: #0d1b2a;
+            --email-badge-bg: #e8edf2;
+            --email-badge-text: #3b5998;
+            --email-body-bg: #ffffff;
+            --email-highlight: #fffbeb;
+            --email-highlight-border: #f5d76e;
+        }
 
-.Recommended.Action .sbar-title{
-  color: #51cf66;
-}
-    .text {
-      font-size: 15px;
-      line-height: 1.55;
-      color: #2c3e50;
-      margin: 0 0 8px;
-    }
-    .signature {
-      margin-top: 32px;
-      padding-top: 20px;
-      border-top: 1px solid #e9edf2;
-    }
-    .signature-name {
-      font-weight: 700;
-      font-size: 16px;
-      color: #1e3a5f;
-      margin-bottom: 4px;
-    }
-    .footer-note {
-      background-color: #f8fafc;
-      padding: 18px 28px;
-      font-size: 12px;
-      color: #5a7184;
-      border-top: 1px solid #e9edf2;
-      text-align: center;
-    }
-    .badge {
-      display: inline-block;
-      background-color: #fef3e8;
-      color: #e67e22;
-      font-size: 12px;
-      font-weight: 600;
-      padding: 4px 12px;
-      border-radius: 30px;
-      margin-bottom: 16px;
-    }
-    .inline-highlight {
-      background-color: #fff1f0;
-      padding: 2px 6px;
-      border-radius: 12px;
-      font-weight: 500;
-      color: #c0392b;
-    }
-    @media (max-width: 550px) {
-      .content { padding: 20px 22px; }
-      .header { padding: 18px 22px; }
-    }
-  </style>
+        [data-email-theme="red"] {
+            --email-header-bg: #b91c1c;
+            --email-header-text: #ffffff;
+            --email-accent: #dc2626;
+            --email-accent-subtle: #fef2f2;
+            --email-block-border: #fecaca;
+            --email-block-accent: #b91c1c;
+            --email-badge-bg: #fee2e2;
+            --email-badge-text: #991b1b;
+            --email-body-bg: #ffffff;
+            --email-highlight: #fff5f5;
+            --email-highlight-border: #fca5a5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .app-header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 0 28px;
+            height: auto;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+            flex-wrap: wrap;
+            padding-top: 12px;
+            padding-bottom: 12px;
+        }
+        .app-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 17px;
+            color: var(--text);
+            white-space: nowrap;
+            letter-spacing: -0.3px;
+        }
+        .app-logo .logo-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 9px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 13.5px;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all var(--transition);
+            white-space: nowrap;
+            font-family: var(--font);
+            letter-spacing: -0.1px;
+            text-decoration: none;
+            position: relative;
+        }
+        .btn:active {
+            transform: scale(0.97);
+        }
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+            box-shadow: var(--shadow-sm);
+        }
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            border-color: var(--accent-dark);
+            box-shadow: var(--shadow-md);
+        }
+        .btn-outline {
+            background: var(--surface);
+            color: var(--text);
+            border-color: var(--border);
+        }
+        .btn-outline:hover {
+            background: var(--surface-alt);
+            border-color: #c8cdd4;
+        }
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-secondary);
+            border-color: transparent;
+        }
+        .btn-ghost:hover {
+            background: var(--surface-alt);
+            color: var(--text);
+        }
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 12.5px;
+            border-radius: 5px;
+        }
+
+        .main-container {
+            display: flex;
+            gap: 0;
+            height: calc(100vh - 60px);
+            overflow: hidden;
+        }
+        .panel {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        .panel-left {
+            max-width: 520px;
+            min-width: 380px;
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+        }
+        .panel-right {
+            background: #eef0f4;
+            flex: 1.3;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 28px;
+            padding-bottom: 40px;
+        }
+
+        .section-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: var(--text-muted);
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+        .framework-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .framework-chip {
+            padding: 9px 15px;
+            border-radius: 20px;
+            border: 1.5px solid var(--border);
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all var(--transition);
+            background: var(--surface);
+            color: var(--text-secondary);
+            white-space: nowrap;
+            position: relative;
+            letter-spacing: -0.1px;
+        }
+        .framework-chip:hover {
+            border-color: #bcc3ce;
+            background: var(--surface-alt);
+            color: var(--text);
+        }
+        .framework-chip.active {
+            background: var(--accent-light);
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+        }
+        .framework-chip .tooltip-hint {
+            display: none;
+            position: absolute;
+            bottom: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1d23;
+            color: #fff;
+            padding: 7px 12px;
+            border-radius: 6px;
+            font-size: 11.5px;
+            font-weight: 500;
+            white-space: nowrap;
+            z-index: 20;
+            pointer-events: none;
+            letter-spacing: 0;
+        }
+        .framework-chip:hover .tooltip-hint {
+            display: block;
+            animation: fadeInUp 0.2s ease;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateX(-50%) translateY(6px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+        .theme-selector {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .theme-dot {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2.5px solid transparent;
+            transition: all var(--transition);
+            position: relative;
+            flex-shrink: 0;
+        }
+        .theme-dot:hover {
+            transform: scale(1.12);
+            box-shadow: var(--shadow-md);
+        }
+        .theme-dot.active {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.1);
+        }
+        .theme-dot.google { background: #1a73e8; }
+        .theme-dot.microsoft { background: #0078d4; }
+        .theme-dot.executive { background: #1e2a3a; border: 2.5px solid #c9a84c; }
+        .theme-dot.minimal { background: #f5f5f5; border: 2px solid #ccc; }
+        .theme-dot.enterprise { background: #0d1b2a; border: 2.5px solid #3b82f6; }
+        .theme-dot.red { background: #dc2626; }
+
+        .form-card {
+            background: var(--surface-alt);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            padding: 16px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            transition: all var(--transition);
+        }
+        .form-card:focus-within {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.04);
+            background: #fff;
+        }
+        .form-card label {
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--text);
+            letter-spacing: -0.2px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .form-card label .field-icon {
+            width: 8px;
+            height: 8px;
+            border-radius: 2px;
+            background: var(--accent);
+            flex-shrink: 0;
+        }
+        .form-card textarea,
+        .form-card input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            resize: none;
+            font-family: var(--font);
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text);
+            outline: none;
+            min-height: 52px;
+            padding: 4px 0;
+            letter-spacing: -0.1px;
+            transition: all var(--transition);
+        }
+        .form-card input {
+            min-height: auto;
+            padding: 8px 0;
+        }
+        .form-card textarea::placeholder,
+        .form-card input::placeholder {
+            color: #b0b6c0;
+        }
+        .highlight-input-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 2px;
+            flex-wrap: wrap;
+        }
+        .highlight-input-row input {
+            flex: 1;
+            min-width: 140px;
+            padding: 7px 12px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: 12.5px;
+            font-family: var(--font);
+            outline: none;
+            transition: all var(--transition);
+            background: #fff;
+            letter-spacing: -0.1px;
+        }
+        .highlight-input-row input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.06);
+        }
+        .highlight-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 9px;
+            border-radius: 12px;
+            background: #fefce8;
+            border: 1px solid #fde68a;
+            font-size: 11px;
+            font-weight: 600;
+            color: #92400e;
+            white-space: nowrap;
+            letter-spacing: -0.1px;
+        }
+
+        .email-preview-wrapper {
+            width: 100%;
+            max-width: 620px;
+            background: #fff;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            transition: all var(--transition-slow);
+        }
+        .email-preview-inner {
+            padding: 32px 30px 28px;
+            font-family: var(--font);
+            color: #2d3038;
+            line-height: 1.7;
+            letter-spacing: -0.1px;
+            word-wrap: break-word;
+        }
+        .email-preview-inner .email-header-block {
+            background: var(--email-header-bg);
+            color: var(--email-header-text);
+            padding: 22px 24px;
+            border-radius: var(--radius) var(--radius) 0 0;
+            margin: -32px -30px 22px -30px;
+        }
+        .email-preview-inner .email-header-block h2 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.4px;
+            line-height: 1.3;
+        }
+        .email-preview-inner .email-header-block .email-subtitle {
+            font-size: 13px;
+            opacity: 0.85;
+            margin-top: 4px;
+            font-weight: 500;
+            letter-spacing: -0.1px;
+        }
+        .email-preview-inner .email-badge {
+            display: inline-block;
+            padding: 5px 13px;
+            border-radius: 14px;
+            font-size: 11.5px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            background: var(--email-badge-bg);
+            color: var(--email-badge-text);
+            margin-bottom: 16px;
+        }
+        .email-preview-inner .email-greeting {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 16px;
+            color: #2d3038;
+            letter-spacing: -0.1px;
+        }
+        .email-block {
+            background: #fafbfc;
+            border-left: 3px solid var(--email-block-accent);
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            padding: 16px 18px;
+            margin-bottom: 14px;
+            transition: all var(--transition);
+        }
+        .email-block .block-content {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #3a3f4a;
+            letter-spacing: -0.1px;
+        }
+        .email-highlight-word {
+            background: var(--email-highlight);
+            border-radius: 3px;
+            padding: 1px 4px;
+            font-weight: 600;
+            border-bottom: 1.5px solid var(--email-highlight-border);
+            display: inline;
+            transition: all var(--transition);
+        }
+        .email-footer-note {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid #eef0f3;
+            font-size: 12px;
+            color: #8b8f99;
+            letter-spacing: -0.1px;
+            line-height: 1.5;
+        }
+        .email-priority-block {
+            background: var(--email-accent-subtle);
+            border: 1px solid var(--email-accent);
+            border-radius: var(--radius);
+            padding: 18px 20px;
+            margin-bottom: 16px;
+            position: relative;
+        }
+        .email-priority-block .priority-indicator {
+            position: absolute;
+            top: -8px;
+            left: 16px;
+            background: var(--email-accent);
+            color: #fff;
+            padding: 3px 12px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.2s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .modal {
+            background: #fff;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            width: 90%;
+            max-width: 750px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .modal-header {
+            padding: 18px 22px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        .modal-header h3 { font-size: 16px; font-weight: 700; letter-spacing: -0.3px; }
+        .modal-body {
+            padding: 18px 22px;
+            overflow-y: auto;
+            flex: 1;
+        }
+        .modal-body pre {
+            background: #1a1d23;
+            color: #e2e8f0;
+            padding: 18px;
+            border-radius: var(--radius);
+            font-size: 12.5px;
+            font-family: var(--font-mono);
+            line-height: 1.6;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+            letter-spacing: 0;
+        }
+        .modal-footer {
+            padding: 14px 22px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1d23;
+            color: #fff;
+            padding: 10px 22px;
+            border-radius: 22px;
+            font-size: 13px;
+            font-weight: 600;
+            z-index: 300;
+            letter-spacing: -0.1px;
+            animation: toastIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            box-shadow: var(--shadow-lg);
+        }
+        @keyframes toastIn { from { opacity: 0; transform: translateX(-50%) translateY(20px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+
+        @media (max-width: 900px) {
+            .main-container { flex-direction: column; height: auto; }
+            .panel-left { max-width: 100%; min-width: 0; border-right: none; border-bottom: 1px solid var(--border); }
+            .panel-right { padding: 20px 14px; min-height: 50vh; }
+            .email-preview-wrapper { max-width: 100%; }
+            .app-header { padding: 10px 16px; gap: 10px; }
+        }
+        @media (max-width: 500px) {
+            .panel-left { padding: 14px 10px; }
+            .panel-right { padding: 14px 8px; }
+            .framework-chip { padding: 7px 11px; font-size: 11.5px; }
+            .email-preview-inner { padding: 18px 14px 16px; }
+            .email-preview-inner .email-header-block { margin: -18px -14px 14px -14px; padding: 16px 14px; }
+            .btn { padding: 7px 12px; font-size: 12px; }
+        }
+    </style>
 </head>
-<body style="margin:0; padding:20px 16px; background-color:#f4f7fc;">
-  <div class="email-wrapper">
-    <div class="header">
-      Server performance issue impacting user login</h1>
-      <p>Actionable intelligence · Login performance degradation</p>
+<body data-email-theme="executive">
+
+    <header class="app-header">
+        <div class="app-logo">
+            <div class="logo-icon">📧</div>
+            <span>Email Builder</span>
+        </div>
+        <div class="header-actions">
+            <button class="btn btn-outline btn-sm" onclick="resetAll()" title="Reset all fields">↻ Reset</button>
+            <button class="btn btn-outline btn-sm" onclick="generateAndShowHTML()" title="Generate production-ready HTML"></> Generate HTML</button>
+            <button class="btn btn-outline btn-sm" onclick="copyHTML()" title="Copy to clipboard">📋 Copy HTML</button>
+            <button class="btn btn-primary btn-sm" onclick="downloadHTML()" title="Download HTML file">⬇ Download</button>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="panel panel-left" id="leftPanel">
+            <div>
+                <div class="section-label">Communication Framework</div>
+                <div class="framework-selector" id="frameworkSelector"></div>
+            </div>
+            <div>
+                <div class="section-label">Email Theme</div>
+                <div class="theme-selector" id="themeSelector"></div>
+            </div>
+            <div class="form-card">
+                <label><span class="field-icon"></span> Email Title</label>
+                <textarea id="emailTitle" placeholder="e.g., Q4 Strategic Update" rows="1" oninput="autoResize(this); onFieldChange();"></textarea>
+            </div>
+            <div class="form-card">
+                <label><span class="field-icon"></span> Subtitle</label>
+                <textarea id="emailSubtitle" placeholder="e.g., Key insights and next steps for the leadership team" rows="1" oninput="autoResize(this); onFieldChange();"></textarea>
+            </div>
+            <div class="form-card">
+                <label>🏷️ Badge Text</label>
+                <input type="text" id="badgeText" placeholder="Internal Communication" oninput="onFieldChange()" value="Internal Communication">
+                <div style="font-size:11px;color:var(--text-muted);">Examples: EXECUTIVE UPDATE, ACTION REQUIRED, CONFIDENTIAL</div>
+            </div>
+            <div class="form-card">
+                <label>✉️ Greeting / Salutation</label>
+                <input type="text" id="greetingText" placeholder="Dear Team," oninput="onFieldChange()" value="Dear Team,">
+                <div style="font-size:11px;color:var(--text-muted);">Examples: Dear Concern, Hello Everyone, Good Morning Team</div>
+            </div>
+            <div id="dynamicFields"></div>
+            <div class="form-card" style="border: 1px dashed var(--border); background: #fefefb;">
+                <label>🔦 Global Highlight Words</label>
+                <div class="highlight-input-row">
+                    <input type="text" id="globalHighlightWords" placeholder="critical, delay, error, deadline, urgent" oninput="onFieldChange()">
+                    <span style="font-size:11px;color:var(--text-muted);white-space:nowrap;">comma-separated</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-right" id="rightPanel">
+            <div class="email-preview-wrapper" id="emailPreviewWrapper">
+                <div class="email-preview-inner" id="emailPreviewInner"></div>
+            </div>
+        </div>
     </div>
-    <div class="content">
-      <div style="margin-bottom: 20px;">
-        <span class="badge"> URGENT · PRODUCTION INCIDENT · REGION: SINGAPORE</span>
-      </div>
-      
-      <!-- Subject / Context line (no extra to/from fields, just subject as part of opening) -->
-    <!-- <p class="text" style="margin-bottom: 20px; background: #f0f4f9; padding: 12px 14px; border-radius: 14px; color: #1e4663;">
-        <strong>📌 Subject:</strong> Server performance issue impacting user login — urgent remediation required</p> -->
-      
-      <!-- Situation -->
-      <div class="sbar-block situation">
-        <div class="sbar-title">Current Issue</div>
-        <p class="text"><strong>There is a significant lag in user login times for our corporate clients.</p>
-        
-      </div>
-      
-      <!-- Context -->
-      <div class="sbar-block Context">
-        <div class="sbar-title">Context</div>
-        <p class="text"><strong>Login attempts have been timing out for users on the <strong class="inline-highlight">Singapore</strong> region for the last <strong class="inline-highlight">30 minutes.</strong> The issue started after the new authentication module was deployed this morning.</p>
-      </div>
-      
-      <!-- Current Impact -->
-      <div class="sbar-block Current Impact">
-        <div class="sbar-title">Current Impact</div>
-        <p class="text"><strong>The new module is likely causing a bottleneck. The high volume of concurrent login requests is overwhelming the current server capacity.</p>
-        
-      </div>
-      
-      <!-- Recommended Action -->
-      <div class="sbar-block Recommended Action">
-        <div class="sbar-title">Recommended Action</div>
-        <p class="text"><strong>We need to roll back the new module immediately and investigate the issue in a staging environment.</p>
-        
-      </div>
-      
-      <div class="signature">
-        <div class="signature-name">Fahim Feroz · IT Department </div>
-        <div style="font-size: 14px; color: #4a627a;">Platform Reliability Engineering</div>
-        <div style="font-size: 13px; color: #7d8fa4; margin-top: 5px;">📞 +8801719398997 |  ✉️fahimferozofficial@gmail.com</div>
-        <div style="font-size: 12px; color: #94a8c0; margin-top: 8px;">cc: SRE Lead, APAC Client Success, Authentication Team Lead, NOC</div>
-      </div>
+
+    <div class="modal-overlay" id="modalOverlay" style="display:none;">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>📄 Generated HTML Email</h3>
+                <button class="btn btn-ghost btn-sm" onclick="closeModal()">✕ Close</button>
+            </div>
+            <div class="modal-body">
+                <pre id="modalCode"></pre>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline btn-sm" onclick="copyHTML()">📋 Copy</button>
+                <button class="btn btn-primary btn-sm" onclick="downloadHTML(); closeModal();">⬇ Download</button>
+            </div>
+        </div>
     </div>
-    <div class="footer-note">
-      Stay fun
+
+    <div id="toastContainer"></div>
+
+    <script>
+        (function() {
+            const frameworks = [
+                { id: 'sbar', name: 'SBAR', description: 'Situation · Background · Assessment · Recommendation', fields: [
+                    { key: 'situation', convertedLabel: 'Current Status', placeholder: 'Describe the current situation or issue...' },
+                    { key: 'background', convertedLabel: 'Key Context', placeholder: 'Relevant background information...' },
+                    { key: 'assessment', convertedLabel: 'Analysis & Impact', placeholder: 'Your assessment of the situation...' },
+                    { key: 'recommendation', convertedLabel: 'Recommended Action', placeholder: 'Recommended course of action...' }
+                ], emailStyle: 'blocks' },
+                { id: 'prep', name: 'PREP', description: 'Point · Reason · Example · Point Restatement', fields: [
+                    { key: 'point', convertedLabel: 'Main Point', placeholder: 'State your main point clearly...' },
+                    { key: 'reason', convertedLabel: 'Why This Matters', placeholder: 'Reasoning behind your point...' },
+                    { key: 'example', convertedLabel: 'Real-World Example', placeholder: 'Concrete example or evidence...' },
+                    { key: 'pointRestatement', convertedLabel: 'In Summary', placeholder: 'Restate your main point...' }
+                ], emailStyle: 'flow' },
+                { id: 'bluf', name: 'BLUF', description: 'Bottom Line Up Front — priority-first briefing', fields: [
+                    { key: 'bottomLine', convertedLabel: 'Priority Update', placeholder: 'Bottom line or key takeaway...' },
+                    { key: 'supportingDetails', convertedLabel: 'Supporting Information', placeholder: 'Supporting details and context...' },
+                    { key: 'requestedAction', convertedLabel: 'Action Needed', placeholder: 'Action needed and by when...' }
+                ], emailStyle: 'priority' },
+                { id: 'threeC', name: '3C', description: 'Clear · Concise · Complete', fields: [
+                    { key: 'clear', convertedLabel: 'Key Message', placeholder: 'Core message with clarity...' },
+                    { key: 'concise', convertedLabel: 'Essential Details', placeholder: 'Only the most essential details...' },
+                    { key: 'complete', convertedLabel: 'Complete Picture', placeholder: 'All necessary context...' }
+                ], emailStyle: 'minimal' },
+                { id: 'cic', name: 'CIC', description: 'Context · Information · Conclusion', fields: [
+                    { key: 'context', convertedLabel: 'Setting the Stage', placeholder: 'Context and background...' },
+                    { key: 'information', convertedLabel: 'Important Information', placeholder: 'Key information and data...' },
+                    { key: 'conclusion', convertedLabel: 'Moving Forward', placeholder: 'Conclusions and next steps...' }
+                ], emailStyle: 'stacked' },
+                { id: 'tca', name: 'TCA', description: 'Topic · Context · Action', fields: [
+                    { key: 'topic', convertedLabel: 'Focus Area', placeholder: 'Introduce the topic...' },
+                    { key: 'context', convertedLabel: 'Background', placeholder: 'Context and background...' },
+                    { key: 'action', convertedLabel: 'Required Action', placeholder: 'Action required and timeline...' }
+                ], emailStyle: 'timeline' }
+            ];
+
+            const themes = [
+                { id: 'google', name: 'Google Style', cssClass: 'google' },
+                { id: 'microsoft', name: 'Microsoft Style', cssClass: 'microsoft' },
+                { id: 'executive', name: 'Executive Style', cssClass: 'executive' },
+                { id: 'minimal', name: 'Minimal Style', cssClass: 'minimal' },
+                { id: 'enterprise', name: 'Enterprise Style', cssClass: 'enterprise' },
+                { id: 'red', name: 'Red Style', cssClass: 'red' }
+            ];
+
+            let state = {
+                frameworkId: 'sbar',
+                themeId: 'executive',
+                emailTitle: '',
+                emailSubtitle: '',
+                badgeText: 'Internal Communication',
+                greetingText: 'Dear Team,',
+                fieldValues: {},
+                highlightWords: ''
+            };
+
+            const $frameworkSelector = document.getElementById('frameworkSelector');
+            const $themeSelector = document.getElementById('themeSelector');
+            const $dynamicFields = document.getElementById('dynamicFields');
+            const $emailTitle = document.getElementById('emailTitle');
+            const $emailSubtitle = document.getElementById('emailSubtitle');
+            const $badgeText = document.getElementById('badgeText');
+            const $greetingText = document.getElementById('greetingText');
+            const $globalHighlightWords = document.getElementById('globalHighlightWords');
+            const $emailPreviewInner = document.getElementById('emailPreviewInner');
+            const $modalOverlay = document.getElementById('modalOverlay');
+            const $modalCode = document.getElementById('modalCode');
+            const $toastContainer = document.getElementById('toastContainer');
+            const $body = document.body;
+
+            function init() {
+                loadStateFromStorage();
+                renderFrameworkChips();
+                renderThemeDots();
+                renderDynamicFields();
+                syncFormFromState();
+                updatePreview();
+            }
+
+            function loadStateFromStorage() {
+                try {
+                    const saved = localStorage.getItem('email-builder-state');
+                    if (saved) {
+                        const parsed = JSON.parse(saved);
+                        state.frameworkId = parsed.frameworkId || 'sbar';
+                        state.themeId = parsed.themeId || 'executive';
+                        state.emailTitle = parsed.emailTitle || '';
+                        state.emailSubtitle = parsed.emailSubtitle || '';
+                        state.badgeText = parsed.badgeText || 'Internal Communication';
+                        state.greetingText = parsed.greetingText || 'Dear Team,';
+                        state.fieldValues = parsed.fieldValues || {};
+                        state.highlightWords = parsed.highlightWords || '';
+                    }
+                } catch (e) {}
+            }
+
+            function saveStateToStorage() {
+                try { localStorage.setItem('email-builder-state', JSON.stringify(state)); } catch (e) {}
+            }
+
+            function syncFormFromState() {
+                $emailTitle.value = state.emailTitle;
+                $emailSubtitle.value = state.emailSubtitle;
+                $badgeText.value = state.badgeText;
+                $greetingText.value = state.greetingText;
+                $globalHighlightWords.value = state.highlightWords;
+                autoResize($emailTitle);
+                autoResize($emailSubtitle);
+            }
+
+            function renderFrameworkChips() {
+                $frameworkSelector.innerHTML = '';
+                frameworks.forEach(fw => {
+                    const chip = document.createElement('div');
+                    chip.className = 'framework-chip' + (fw.id === state.frameworkId ? ' active' : '');
+                    chip.textContent = fw.name;
+                    chip.setAttribute('data-framework', fw.id);
+                    const tooltip = document.createElement('span');
+                    tooltip.className = 'tooltip-hint';
+                    tooltip.textContent = fw.description;
+                    chip.appendChild(tooltip);
+                    chip.addEventListener('click', () => {
+                        state.frameworkId = fw.id;
+                        state.fieldValues = {};
+                        renderFrameworkChips();
+                        renderDynamicFields();
+                        updatePreview();
+                        saveStateToStorage();
+                    });
+                    $frameworkSelector.appendChild(chip);
+                });
+            }
+
+            function renderThemeDots() {
+                $themeSelector.innerHTML = '';
+                themes.forEach(th => {
+                    const dot = document.createElement('div');
+                    dot.className = 'theme-dot ' + th.cssClass + (th.id === state.themeId ? ' active' : '');
+                    dot.title = th.name;
+                    dot.setAttribute('data-theme', th.id);
+                    dot.addEventListener('click', () => {
+                        state.themeId = th.id;
+                        $body.setAttribute('data-email-theme', th.id);
+                        renderThemeDots();
+                        updatePreview();
+                        saveStateToStorage();
+                    });
+                    $themeSelector.appendChild(dot);
+                });
+                $body.setAttribute('data-email-theme', state.themeId);
+            }
+
+            function renderDynamicFields() {
+                const fw = frameworks.find(f => f.id === state.frameworkId);
+                if (!fw) return;
+                $dynamicFields.innerHTML = '';
+                fw.fields.forEach(field => {
+                    const card = document.createElement('div');
+                    card.className = 'form-card';
+                    const label = document.createElement('label');
+                    const icon = document.createElement('span');
+                    icon.className = 'field-icon';
+                    label.appendChild(icon);
+                    label.appendChild(document.createTextNode(' ' + field.convertedLabel));
+                    const textarea = document.createElement('textarea');
+                    textarea.setAttribute('data-field-key', field.key);
+                    textarea.placeholder = field.placeholder;
+                    textarea.rows = 2;
+                    textarea.value = state.fieldValues[field.key] || '';
+                    textarea.addEventListener('input', function() {
+                        autoResize(this);
+                        state.fieldValues[field.key] = this.value;
+                        updatePreview();
+                        saveStateToStorage();
+                    });
+                    const highlightRow = document.createElement('div');
+                    highlightRow.className = 'highlight-input-row';
+                    const highlightInput = document.createElement('input');
+                    highlightInput.type = 'text';
+                    highlightInput.placeholder = 'Highlight words (comma-separated)';
+                    highlightInput.setAttribute('data-highlight-key', field.key);
+                    highlightInput.value = (state.fieldValues[field.key + '_highlights'] || '');
+                    highlightInput.addEventListener('input', function() {
+                        state.fieldValues[field.key + '_highlights'] = this.value;
+                        updatePreview();
+                        saveStateToStorage();
+                    });
+                    const tagSpan = document.createElement('span');
+                    tagSpan.className = 'highlight-tag';
+                    tagSpan.textContent = '🔦';
+                    tagSpan.title = 'Words to highlight in this section';
+                    highlightRow.appendChild(highlightInput);
+                    highlightRow.appendChild(tagSpan);
+
+                    card.appendChild(label);
+                    card.appendChild(textarea);
+                    card.appendChild(highlightRow);
+                    $dynamicFields.appendChild(card);
+                    setTimeout(() => autoResize(textarea), 10);
+                });
+            }
+
+            function autoResize(textarea) {
+                textarea.style.height = 'auto';
+                textarea.style.height = Math.max(52, textarea.scrollHeight) + 'px';
+            }
+
+            function getCurrentFramework() {
+                return frameworks.find(f => f.id === state.frameworkId) || frameworks[0];
+            }
+
+            function applyHighlights(text, highlightWordsStr) {
+                if (!text || !highlightWordsStr || !highlightWordsStr.trim()) return escapeHTML(text);
+                const words = highlightWordsStr.split(',').map(w => w.trim()).filter(w => w.length > 0);
+                if (words.length === 0) return escapeHTML(text);
+                let escaped = escapeHTML(text);
+                const sorted = [...words].sort((a, b) => b.length - a.length);
+                const uniquePatterns = [...new Set(sorted.map(w => escapeRegExp(w)))];
+                const regex = new RegExp('\\b(' + uniquePatterns.join('|') + ')\\b', 'gi');
+                escaped = escaped.replace(regex, '<span class="email-highlight-word">$1</span>');
+                return escaped;
+            }
+
+            function escapeHTML(str) {
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
+            }
+
+            function escapeRegExp(str) {
+                return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            }
+
+            function getCombinedHighlights(fieldKey) {
+                const parts = [];
+                if (state.highlightWords && state.highlightWords.trim()) parts.push(state.highlightWords.trim());
+                const perField = state.fieldValues[fieldKey + '_highlights'];
+                if (perField && perField.trim()) parts.push(perField.trim());
+                return parts.join(',');
+            }
+
+            function updatePreview() {
+                const fw = getCurrentFramework();
+                const title = state.emailTitle || 'Corporate Update';
+                const subtitle = state.emailSubtitle || 'Important information for the team';
+                const badge = state.badgeText.trim();
+                const greeting = state.greetingText.trim();
+
+                let blocksHTML = '';
+                fw.fields.forEach((field, index) => {
+                    const content = state.fieldValues[field.key] || '';
+                    const displayContent = content || '[Add content in the form]';
+                    const highlights = getCombinedHighlights(field.key);
+                    const highlightedContent = applyHighlights(displayContent, highlights);
+
+                    if (fw.emailStyle === 'priority' && index === 0) {
+                        blocksHTML += `
+                    <div class="email-priority-block">
+                      <div class="priority-indicator">⭐ Priority</div>
+                      <div class="block-content" style="margin-top:6px;">${highlightedContent}</div>
+                    </div>`;
+                    } else {
+                        blocksHTML += `
+                    <div class="email-block">
+                      <div class="block-content">${highlightedContent}</div>
+                    </div>`;
+                    }
+                });
+
+                const badgeHTML = badge ? `<div class="email-badge">${escapeHTML(badge)}</div>` : '';
+                const greetingHTML = greeting ? `<div class="email-greeting">${escapeHTML(greeting)}</div>` : '';
+
+                $emailPreviewInner.innerHTML = `
+              <div class="email-header-block">
+                <h2>${escapeHTML(title)}</h2>
+                <div class="email-subtitle">${escapeHTML(subtitle)}</div>
+              </div>
+              ${badgeHTML}
+              ${greetingHTML}
+              ${blocksHTML}
+              <div class="email-footer-note">
+                This communication was prepared for internal review. For questions or follow-up, please reach out to the relevant team lead.<br>
+                <span style="opacity:0.6;"></span>
+              </div>`;
+            }
+
+            function generateFullHTML() {
+                const fw = getCurrentFramework();
+                const title = state.emailTitle || 'Corporate Update';
+                const subtitle = state.emailSubtitle || 'Important information for the team';
+                const badge = state.badgeText.trim();
+                const greeting = state.greetingText.trim();
+                const styles = getComputedStyle($body);
+                const headerBg = styles.getPropertyValue('--email-header-bg').trim();
+                const headerText = styles.getPropertyValue('--email-header-text').trim();
+                const accent = styles.getPropertyValue('--email-accent').trim();
+                const accentSubtle = styles.getPropertyValue('--email-accent-subtle').trim();
+                const blockAccent = styles.getPropertyValue('--email-block-accent').trim();
+                const badgeBg = styles.getPropertyValue('--email-badge-bg').trim();
+                const badgeTextColor = styles.getPropertyValue('--email-badge-text').trim();
+                const highlightBg = styles.getPropertyValue('--email-highlight').trim();
+                const highlightBorder = styles.getPropertyValue('--email-highlight-border').trim();
+
+                let blocksHTML = '';
+                fw.fields.forEach((field, index) => {
+                    const content = state.fieldValues[field.key] || '';
+                    const displayContent = content || '[' + field.convertedLabel + ']';
+                    const highlights = getCombinedHighlights(field.key);
+                    const highlightedContent = applyHighlights(displayContent, highlights);
+
+                    if (fw.emailStyle === 'priority' && index === 0) {
+                        blocksHTML += `
+                <div style="background:${accentSubtle}; border:1px solid ${accent}; border-radius:10px; padding:18px 20px; margin-bottom:16px; position:relative;">
+                  <div style="position:absolute; top:-8px; left:16px; background:${accent}; color:#fff; padding:3px 12px; border-radius:10px; font-size:10px; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; font-family:Arial,Helvetica,sans-serif;">⭐ Priority</div>
+                  <div style="font-size:14px; line-height:1.7; color:#3a3f4a; font-family:Arial,Helvetica,sans-serif; margin-top:6px;">${highlightedContent}</div>
+                </div>`;
+                    } else {
+                        blocksHTML += `
+                <div style="background:#fafbfc; border-left:3px solid ${blockAccent}; border-radius:0 6px 6px 0; padding:16px 18px; margin-bottom:14px;">
+                  <div style="font-size:14px; line-height:1.7; color:#3a3f4a; font-family:Arial,Helvetica,sans-serif;">${highlightedContent}</div>
+                </div>`;
+                    }
+                });
+
+                const badgeHTML = badge ? `<div style="display:inline-block; padding:5px 13px; border-radius:14px; font-size:11.5px; font-weight:700; letter-spacing:0.3px; text-transform:uppercase; background:${badgeBg}; color:${badgeTextColor}; margin-bottom:16px; font-family:Arial,Helvetica,sans-serif;">${escapeHTML(badge)}</div>` : '';
+                const greetingHTML = greeting ? `<div style="font-size:14px; font-weight:500; margin-bottom:16px; color:#2d3038; font-family:Arial,Helvetica,sans-serif;">${escapeHTML(greeting)}</div>` : '';
+
+                return `<!DOCTYPE html>
+        <html lang="en">
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>${escapeHTML(title)}</title>
+        <style>
+          body { margin:0; padding:0; background:#f5f6f8; font-family:Arial,Helvetica,sans-serif; -webkit-font-smoothing:antialiased; }
+          .email-container { max-width:600px; margin:30px auto; background:#ffffff; border-radius:14px; box-shadow:0 8px 24px rgba(0,0,0,0.07); overflow:hidden; }
+          .email-inner { padding:32px 30px 28px; line-height:1.7; color:#2d3038; }
+          .email-header-block { background:${headerBg}; color:${headerText}; padding:22px 24px; border-radius:10px 10px 0 0; margin:-32px -30px 22px -30px; }
+          .email-header-block h2 { margin:0; font-size:20px; font-weight:700; letter-spacing:-0.4px; }
+          .email-subtitle { font-size:13px; opacity:0.85; margin-top:4px; font-weight:500; }
+          .email-highlight-word { background:${highlightBg}; border-radius:3px; padding:1px 4px; font-weight:600; border-bottom:1.5px solid ${highlightBorder}; }
+          .email-footer-note { margin-top:20px; padding-top:16px; border-top:1px solid #eef0f3; font-size:12px; color:#8b8f99; line-height:1.5; }
+</style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="email-inner">
+            <div class="email-header-block">
+                <h2>${escapeHTML(title)}</h2>
+                <div class="email-subtitle">${escapeHTML(subtitle)}</div>
+            </div>
+            ${badgeHTML}
+            ${greetingHTML}
+            ${blocksHTML}
+            <div class="email-footer-note">
+                This communication was prepared for internal review. For questions or follow-up, please reach out to the relevant team lead.<br>
+                <span style="opacity:0.6;"></span>
+            </div>
+        </div>
     </div>
-  </div>
 </body>
-</html>
+</html>`;
+            }
+
+            function generateAndShowHTML() {
+                $modalCode.textContent = generateFullHTML();
+                $modalOverlay.style.display = 'flex';
+            }
+
+            function closeModal() { $modalOverlay.style.display = 'none'; }
+            $modalOverlay.addEventListener('click', function(e) { if (e.target === $modalOverlay) closeModal(); });
+
+            function copyHTML() {
+                const html = generateFullHTML();
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(html).then(() => showToast('✅ HTML copied to clipboard!'));
+                } else {
+                    fallbackCopy(html);
+                }
+            }
+
+            function fallbackCopy(text) {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed';
+                textarea.style.left = '-9999px';
+                document.body.appendChild(textarea);
+                textarea.focus();
+                textarea.select();
+                try { document.execCommand('copy'); showToast('✅ HTML copied!'); } catch (e) { showToast('⚠️ Copy failed. Use Generate HTML button.'); }
+                document.body.removeChild(textarea);
+            }
+
+            function downloadHTML() {
+                const html = generateFullHTML();
+                const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'corporate-email-template.html';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+                showToast('⬇ HTML file downloaded!');
+            }
+
+            function resetAll() {
+                if (confirm('Reset all fields and clear the email? This cannot be undone.')) {
+                    state.frameworkId = 'sbar';
+                    state.themeId = 'executive';
+                    state.emailTitle = '';
+                    state.emailSubtitle = '';
+                    state.badgeText = 'Internal Communication';
+                    state.greetingText = 'Dear Team,';
+                    state.fieldValues = {};
+                    state.highlightWords = '';
+                    $body.setAttribute('data-email-theme', 'executive');
+                    renderFrameworkChips();
+                    renderThemeDots();
+                    renderDynamicFields();
+                    syncFormFromState();
+                    updatePreview();
+                    saveStateToStorage();
+                    showToast('🔄 All fields reset.');
+                }
+            }
+
+            function showToast(message) {
+                const toast = document.createElement('div');
+                toast.className = 'toast';
+                toast.textContent = message;
+                $toastContainer.appendChild(toast);
+                setTimeout(() => {
+                    toast.style.opacity = '0';
+                    toast.style.transition = 'opacity 0.35s ease';
+                    setTimeout(() => { if (toast.parentNode) toast.parentNode.removeChild(toast); }, 400);
+                }, 2200);
+            }
+
+            function onFieldChange() {
+                state.emailTitle = $emailTitle.value;
+                state.emailSubtitle = $emailSubtitle.value;
+                state.badgeText = $badgeText.value;
+                state.greetingText = $greetingText.value;
+                state.highlightWords = $globalHighlightWords.value;
+                updatePreview();
+                saveStateToStorage();
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                    e.preventDefault();
+                    saveStateToStorage();
+                    showToast('💾 Draft saved');
+                }
+                if ((e.ctrlKey || e.metaKey) && e.key === 'g') {
+                    e.preventDefault();
+                    generateAndShowHTML();
+                }
+                if (e.key === 'Escape' && $modalOverlay.style.display === 'flex') closeModal();
+            });
+
+            window.autoResize = autoResize;
+            window.onFieldChange = onFieldChange;
+            window.generateAndShowHTML = generateAndShowHTML;
+            window.closeModal = closeModal;
+            window.copyHTML = copyHTML;
+            window.downloadHTML = downloadHTML;
+            window.resetAll = resetAll;
+
+            init();
+            showToast('👋 Ready — select a framework and start writing!');
+        })();
+    </script>
+</body>
+</html> 
